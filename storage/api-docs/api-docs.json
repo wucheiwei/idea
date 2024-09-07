@@ -1,0 +1,592 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "articleManger",
+        "contact": {
+            "name": "mylxsw",
+            "email": "mylxsw@aicode.cc"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "開發環境"
+        }
+    ],
+    "paths": {
+        "/article/index": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Get all articles",
+                "operationId": "0c072f2b56fc4122910c79eb168e500b",
+                "responses": {
+                    "200": {
+                        "description": "A list of articles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "title": {
+                                                "description": "Article title",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/create": {
+            "post": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "創建新分類",
+                "operationId": "6830b019af457cf98618e1b6fc8c8f09",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "文章分類",
+                                        "type": "string"
+                                    },
+                                    "article": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "title": {
+                                                    "description": "文章標題",
+                                                    "type": "string"
+                                                },
+                                                "content": {
+                                                    "description": "文章內容",
+                                                    "type": "string"
+                                                },
+                                                "language": {
+                                                    "description": "文章語言",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "創建成功",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/{id}": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Get article by ID",
+                "operationId": "392a3f313ef2fd63cc716612d1fe93f4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "Article ID",
+                                            "type": "integer"
+                                        },
+                                        "title": {
+                                            "description": "Article title",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/update": {
+            "put": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "更新分類",
+                "operationId": "25998eeeef0aca77269f90640e5ecae8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "description": "Article ID",
+                                        "type": "integer"
+                                    },
+                                    "title": {
+                                        "description": "Article title",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "更新完成",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "查無此資料"
+                    }
+                }
+            }
+        },
+        "/article/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "刪除分類",
+                "operationId": "e9a537d5c720d1e9da0d9565f760c8ab",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刪除完成",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/translation/index": {
+            "get": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "Get translations by article ID and language",
+                "operationId": "2d258c3dc120a0e47a767bb9922c935d",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of translations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "title": {
+                                                "description": "文章標題",
+                                                "type": "string"
+                                            },
+                                            "content": {
+                                                "description": "文章內容",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/translation/create": {
+            "post": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "建立新文章",
+                "operationId": "6ecbc8b06cb5d854670fc5b591151417",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "article_id": {
+                                        "description": "Article ID",
+                                        "type": "integer"
+                                    },
+                                    "article": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "title": {
+                                                    "description": "文章標題",
+                                                    "type": "string"
+                                                },
+                                                "content": {
+                                                    "description": "文章內容",
+                                                    "type": "string"
+                                                },
+                                                "language": {
+                                                    "description": "語系",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "創建完成",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "語言已存在",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/translation/{id}": {
+            "get": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "Get translation by ID",
+                "operationId": "1944ddb8256a96373a038d590ff2ebda",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Translation details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "Translation ID",
+                                            "type": "integer"
+                                        },
+                                        "title": {
+                                            "description": "Translation title",
+                                            "type": "string"
+                                        },
+                                        "content": {
+                                            "description": "Translation content",
+                                            "type": "string"
+                                        },
+                                        "language": {
+                                            "description": "Translation language",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Translation not found"
+                    }
+                }
+            }
+        },
+        "/translation/update/{id}": {
+            "put": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "update Translation",
+                "operationId": "6e7befaecab7f8271cc8abb3595d88a2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "article_id": {
+                                        "description": "Article ID",
+                                        "type": "integer"
+                                    },
+                                    "title": {
+                                        "description": "Translation title",
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "description": "Translation content",
+                                        "type": "string"
+                                    },
+                                    "language": {
+                                        "description": "Translation language",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "更新完成",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "語言已存在",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "查無此資料"
+                    }
+                }
+            }
+        },
+        "/translation/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "刪除文章",
+                "operationId": "3ecaced55fddbf7ab516e4b8b8963631",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刪除完成",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "test": {
+                "title": "响应实体",
+                "description": "响应实体，响应结果统一使用该结构",
+                "properties": {
+                    "code": {
+                        "description": "响应代码",
+                        "type": "string"
+                    },
+                    "message": {
+                        "description": "响应结果提示",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Article",
+            "description": "Article"
+        },
+        {
+            "name": "Translation",
+            "description": "Translation"
+        }
+    ]
+}

@@ -16,7 +16,18 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/', 'ArticleController@edit');
-$router->post('/create', 'ArticleController@create');
-$router->put('/update', 'ArticleController@update');
-$router->delete('/delete', 'ArticleController@delete');
+$router->group(['prefix' => 'article'], function () use ($router) {
+    $router->get('/index', 'ArticleController@index');
+    $router->get('/{id}', 'ArticleController@edit');
+    $router->post('/create', 'ArticleController@create');
+    $router->put('/update', 'ArticleController@update');
+    $router->delete('/delete/{id}', 'ArticleController@delete');
+});
+$router->group(['prefix' => 'translation'], function () use ($router) {
+    $router->get('/index', 'TranslationController@index');
+    $router->get('/{id}', 'TranslationController@edit');
+    $router->post('/create', 'TranslationController@create');
+    $router->put('/update/{id}', 'TranslationController@update');
+    $router->delete('/delete/{id}', 'TranslationController@delete');
+});
+

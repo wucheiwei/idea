@@ -12,10 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('translation', function (Blueprint $table) {
+        Schema::create('translations', function (Blueprint $table) {
             $table->id();
             $table->string('article_id', 255)->comment('文章Id');
-            $table->string('langue', 50)->comment('語系');
+            $table->string('language', 50)->comment('語系');
             $table->string('title', 50)->comment('標題');
             $table->string('content', 255)->comment('內容');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('新增時間');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('translation');
+        Schema::dropIfExists('translations');
     }
 };
